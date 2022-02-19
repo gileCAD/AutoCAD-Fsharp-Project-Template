@@ -1,0 +1,31 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+  
+    <!-- Change the name and description as desired -->
+    <Name>AutoCAD Fsharp Plugin</Name>
+    <Description>Fsharp Project for AutoCAD Plugin</Description>
+	
+    <ProjectType>FSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+	
+    <!-- Change the name and description as desired -->
+    <DefaultName>AutoCAD Fsharp Plugin</DefaultName>
+	
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="AcadPlugin.fsproj" File="AcadPlugin.fsproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.fs">AssemblyInfo.fs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Commands.fs">Commands.fs</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Script.fsx">Script.fsx</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="packages.config">packages.config</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="start.scr">start.scr</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>
