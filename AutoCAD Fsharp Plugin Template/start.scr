@@ -1,1 +1,1 @@
-﻿netload "$projectname$.dll" 
+﻿netload "$projectname$.dll"
