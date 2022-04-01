@@ -48,14 +48,23 @@ let drawCircle () =
 ### Editing the template files
 In order for the template to work, the paths to the acad.exe file and to the autoCAD libraries must match those on the local computer.
 
+#### Properties\launchSettings.json
+The path to the acad.exe file of the AutoCAD version to be launched at debugging startup must be consistent with that of the local computer.
+```	
+{
+  "profiles": {
+    "$safeprojectname$": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Autodesk\\AutoCAD 2022\\acad.exe",
+      "commandLineArgs": "/nologo /b \"start.scr\""
+    }
+  }
+}
+```
+
 #### AcadPlugin.fsproj
 The MSBuild project file (.fsproj) is an xml file that describe and control the process of generation of the applications.
 
-The path to the acad.exe file of the AutoCAD version to be launched at debugging startup must be consistent with that of the local computer.
-```	
-    <!-- Change the path to the installation folder of the  targeted AutoCAD version -->
-    <StartProgram>C:\Program Files\Autodesk\AutoCAD 2017\acad.exe</StartProgram>
-```
 The paths to the AutoCAD libraries referenced by the project must be consistent with those of the local computer.
 ```
     <!-- Change the paths to the targeted AutoCAD libraries -->
@@ -75,7 +84,7 @@ The paths to the AutoCAD libraries referenced by the project must be consistent 
 It is preferable that the required version of .NET Framework is the one installed by the targeted AutoCAD version (see [this page](https://help.autodesk.com/view/OARX/2022/ENU/?guid=GUID-450FD531-B6F6-4BAE-9A8C-8230AAC48CB4)).
 ```
     <!-- Change the targeted .NET Framework version -->
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFramework>net48</TargetFramework> 
 ```
 #### MyTemplate.vstemplate
 This file describes the template.
@@ -83,13 +92,13 @@ This file describes the template.
 Name and Desription of the template.
 ```
     <!-- Change the name and description as desired -->
-    <Name>AutoCAD Fsharp Plugin</Name>
+    <Name>Fsharp Plugin for AutoCAD</Name>
     <Description>Fsharp Project for AutoCAD Plugin</Description>
 ```
 Default name of the assembly.
 ```
     <!-- Change the default name as desired -->
-    <DefaultName>AutoCAD Fsharp Plugin</DefaultName>
+    <DefaultName>FsharpPluginForAutoCAD</DefaultName>
 ```
 ### Installation of the template
 The 'AutoCAD Plugin Template' folder (possibly zipped) have to be pasted in the 'Visual Studio 20XX\Templates\ProjectTemplates' directory.
