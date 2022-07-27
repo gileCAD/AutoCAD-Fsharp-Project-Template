@@ -105,28 +105,22 @@ let drawGoldenSpiral () =
             let! pir = Active.ed.GetInteger(opts)
             let! ppr = Active.ed.GetPoint("\nStart point: ")
             let! pdr = Active.ed.GetDistance(ppr.Value, "\nWidth: ")
-            return (ppr.Value, pir.Value * 4, pdr.Value)
+            return (ppr.Value, pir.Value * 4 + 1, pdr.Value)
         }
 
     match inputs with
     | None -> ()
-    | Some (p, n, w) ->
+    | Some (pt, n, w) ->
         use tr = Active.db.TransactionManager.StartTransaction()
         let ratio = sqrt 1.25 - 0.5
         let bulge = - tan(System.Math.PI / 8.)
         let pline = new Polyline()
 
-        let rec loop i p d =
-            if i <= n then
-                pline.AddVertexAt(i, p, bulge, 0., 0.)
+        (Point2d(pt.X, pt.Y), (ratio, ratio), w)
+        |> Seq.unfold (fun (p, (a, b), d) -> Some(p, (p + Vector2d(d * a, d * b), (b, -a), ratio * d)))
+        |> Seq.take n
+        |> Seq.iteri (fun i p -> pline.AddVertexAt(i, p, bulge, 0., 0.))
 
-                match i % 4 with
-                | 1 -> loop (i + 1) (p + Vector2d(d, -d)) (d * ratio)
-                | 2 -> loop (i + 1) (p + Vector2d(-d, -d)) (d * ratio)
-                | 3 -> loop (i + 1) (p + Vector2d(-d, d)) (d * ratio)
-                | _ -> loop (i + 1) (p + Vector2d(d, d)) (d * ratio)
-
-        loop 0 (Point2d(p.X, p.Y)) (w * ratio)
         pline.TransformBy(Active.ed.CurrentUserCoordinateSystem)
 
         Active.db.CurrentSpaceId
