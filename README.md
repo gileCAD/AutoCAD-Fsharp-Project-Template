@@ -4,7 +4,7 @@ This template allows to start a F# project for an AutoCAD plugin in Visual Studi
 
 For AutoCAD 2016 and later versions it is imperative that the LEGACYCODESEARCH system variable is set to 1 to allow automatic loading of the assembly. 
 
-The command.fs file contains an examle of command and helpers to write some common AutoCAD tasks in a more declarative functional style.
+The command.fs file contains an example of command and helpers to write some common AutoCAD tasks in a more declarative functional style.
 
 Example using pipeline style to erase lines shorter than a supplied value
 ```
