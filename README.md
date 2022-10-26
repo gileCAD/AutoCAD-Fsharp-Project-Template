@@ -7,7 +7,7 @@ For AutoCAD 2016 and later versions it is imperative that the LEGACYCODESEARCH s
 The command.fs file contains an example of command and helpers to write some common AutoCAD tasks in a more declarative functional style.
 
 Example using pipeline style to erase lines shorter than a supplied value
-```
+```F#
 let eraseShortLines minLength =
     use tr = Active.db.TransactionManager.StartTransaction()
 
@@ -22,7 +22,7 @@ let eraseShortLines minLength =
 ```
 
 Example using a prompts workflow to get the center and radius of a circle
-```
+```F#
 [<CommandMethod("DrawCircle")>]
 let drawCircle () =
     let inputs =
@@ -50,7 +50,7 @@ In order for the template to work, the paths to the acad.exe file and to the aut
 
 #### Properties\launchSettings.json
 The path to the acad.exe file of the AutoCAD version to be launched at debugging startup must be consistent with that of the local computer.
-```	
+```	json
 {
   "profiles": {
     "$safeprojectname$": {
@@ -66,7 +66,7 @@ The path to the acad.exe file of the AutoCAD version to be launched at debugging
 The MSBuild project file (.fsproj) is an xml file that describe and control the process of generation of the applications.
 
 The paths to the AutoCAD libraries referenced by the project must be consistent with those of the local computer.
-```
+```xml
     <!-- Change the paths to the targeted AutoCAD libraries -->
     <Reference Include="AcCoreMgd">
       <HintPath>C:\ObjectARX 2017\inc\AcCoreMgd.dll</HintPath>
@@ -82,7 +82,7 @@ The paths to the AutoCAD libraries referenced by the project must be consistent 
     </Reference>
 ```
 It is preferable that the required version of .NET Framework is the one installed by the targeted AutoCAD version (see [this page](https://help.autodesk.com/view/OARX/2022/ENU/?guid=GUID-450FD531-B6F6-4BAE-9A8C-8230AAC48CB4)).
-```
+```xml
     <!-- Change the targeted .NET Framework version -->
     <TargetFramework>net48</TargetFramework> 
 ```
@@ -90,13 +90,13 @@ It is preferable that the required version of .NET Framework is the one installe
 This file describes the template.
 
 Name and Desription of the template.
-```
+```xml
     <!-- Change the name and description as desired -->
     <Name>Fsharp Plugin for AutoCAD</Name>
     <Description>Fsharp Project for AutoCAD Plugin</Description>
 ```
 Default name of the assembly.
-```
+```xml
     <!-- Change the default name as desired -->
     <DefaultName>FsharpPluginForAutoCAD</DefaultName>
 ```
