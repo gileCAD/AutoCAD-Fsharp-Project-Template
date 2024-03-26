@@ -1,10 +1,13 @@
 # AutoCAD-Fsharp-Project-Template
-### A F# Visual Studio Project Template for an AutoCAD Plugin.
-This template allows to start a F# project for an AutoCAD plugin in Visual Studio . It is designed to automatically start the specified AutoCAD version and load the assemby when starting the debugging.
+### F# Visual Studio Project Template for an AutoCAD Plugin.
+These templates allow to start a F# project for an AutoCAD plugin in Visual Studio . They are designed to automatically start the specified AutoCAD version and load the assemby when starting the debugging.
+'AutoCAD R24 Fsharp Project Template' is to be used with AutoCAD prior to 2025 (targets .NET Framework).
+'AutoCAD R25 Fsharp Project Template' is to be used with AutoCAD 2025 and later (targets .NET 8).
 
 For AutoCAD 2016 and later versions it is imperative that the LEGACYCODESEARCH system variable is set to 1 to allow automatic loading of the assembly. 
 
-The command.fs file contains an example of command and helpers to write some common AutoCAD tasks in a more declarative functional style.
+The helpers.fs file contains helpers to write some common AutoCAD tasks in a more declarative functional style.
+The command.fs file contains an example of command.
 
 Example using pipeline style to erase lines shorter than a supplied value
 ```F#
@@ -62,26 +65,28 @@ The path to the acad.exe file of the AutoCAD version to be launched at debugging
 }
 ```
 
-#### AcadPlugin.fsproj
+#### FsharpPluginNetFramework.fsproj / FsharpPluginNet8.fsproj
 The MSBuild project file (.fsproj) is an xml file that describe and control the process of generation of the applications.
 
 The paths to the AutoCAD libraries referenced by the project must be consistent with those of the local computer.
 ```xml
-    <!-- Change the paths to the targeted AutoCAD libraries -->
-    <Reference Include="AcCoreMgd">
-      <HintPath>C:\ObjectARX 2017\inc\AcCoreMgd.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="AcDbMgd">
-      <HintPath>C:\ObjectARX 2017\inc\AcDbMgd.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="AcMgd">
-      <HintPath>C:\ObjectARX 2017\inc\AcMgd.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
+	<!-- Change the paths to the targeted AutoCAD libraries -->
+	<ItemGroup>
+		<Reference Include="accoremgd">
+			<HintPath>F:\ObjectARX 2022\inc\AcCoreMgd.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Acdbmgd">
+			<HintPath>F:\ObjectARX 2022\inc\AcDbMgd.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="acmgd">
+			<HintPath>F:\ObjectARX 2022\inc\AcMgd.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+	</ItemGroup>
 ```
-It is preferable that the required version of .NET Framework is the one installed by the targeted AutoCAD version (see [this page](https://help.autodesk.com/view/OARX/2022/ENU/?guid=GUID-450FD531-B6F6-4BAE-9A8C-8230AAC48CB4)).
+It is preferable that the required version of .NET (Framework) is the one installed by the targeted AutoCAD version (see [this page](https://help.autodesk.com/view/OARX/2024/ENU/?guid=GUID-450FD531-B6F6-4BAE-9A8C-8230AAC48CB4)).
 ```xml
     <!-- Change the targeted .NET Framework version -->
     <TargetFramework>net48</TargetFramework> 
@@ -91,14 +96,14 @@ This file describes the template.
 
 Name and Desription of the template.
 ```xml
-    <!-- Change the name and description as desired -->
-    <Name>Fsharp Plugin for AutoCAD</Name>
-    <Description>Fsharp Project for AutoCAD Plugin</Description>
+		<!-- Change the name and description as desired -->
+		<Name>Fsharp Plugin for AutoCAD R24</Name>
+		<Description>Fsharp Plugin for AutoCAD R24 (.NET Framework)</Description>
 ```
 Default name of the assembly.
 ```xml
-    <!-- Change the default name as desired -->
-    <DefaultName>FsharpPluginForAutoCAD</DefaultName>
+		<!-- Change the default project name as desired -->
+		<DefaultName>AcadR24FsharpPlugin</DefaultName>
 ```
 ### Installation of the template
 The 'AutoCAD Plugin Template' folder (possibly zipped) have to be pasted in the 'Visual Studio 20XX\Templates\ProjectTemplates' directory.
