@@ -1,0 +1,33 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+	<TemplateData>
+  
+		<!-- Change the name and description as desired -->
+		<Name>Fsharp Plugin for AutoCAD R25</Name>
+		<Description>Fsharp Plugin for AutoCAD R25 (.NET 8)</Description>
+	
+		<ProjectType>FSharp</ProjectType>
+		<ProjectSubType>
+		</ProjectSubType>
+		<SortOrder>1000</SortOrder>
+		<CreateNewFolder>true</CreateNewFolder>
+	
+		<!-- Change the default project name as desired -->
+		<DefaultName>AcadR25FsharpPlugin</DefaultName>
+	
+		<ProvideDefaultName>true</ProvideDefaultName>
+		<LocationField>Enabled</LocationField>
+		<EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+		<CreateInPlace>true</CreateInPlace>
+		<Icon>AcadFsTemplateIcon.ico</Icon>
+	</TemplateData>
+	<TemplateContent>
+		<Project TargetFileName="FsharpPluginNet8.fsproj" File="FsharpPluginNet8.fsproj" ReplaceParameters="true">
+			<ProjectItem ReplaceParameters="true" TargetFileName="Helpers.fs">Helpers.fs</ProjectItem>
+			<ProjectItem ReplaceParameters="true" TargetFileName="Commands.fs">Commands.fs</ProjectItem>
+			<ProjectItem ReplaceParameters="true" TargetFileName="start.scr">start.scr</ProjectItem>
+			<Folder Name="Properties">
+				<ProjectItem ReplaceParameters="true" TargetFileName="launchSettings.json">launchSettings.json</ProjectItem>
+			</Folder>
+		</Project>
+	</TemplateContent>
+</VSTemplate>

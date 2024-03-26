@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "$safeprojectname$": {
+      "commandName": "Executable",
+      "executablePath": "F:\\Program Files\\Autodesk\\AutoCAD 2024\\acad.exe",
+      "commandLineArgs": "/nologo /b \"start.scr\""
+    }
+  }
+}
