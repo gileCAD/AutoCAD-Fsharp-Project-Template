@@ -15,10 +15,10 @@ let eraseShortLines minLength =
     use tr = Active.db.TransactionManager.StartTransaction()
 
     Active.db
-    |> getModelSpace OpenMode.ForRead
-    |> getObjects<Line> OpenMode.ForRead
+    |> getModelSpace tr OpenMode.ForRead
+    |> getObjects<Line> tr OpenMode.ForRead
     |> Seq.filter (fun l -> l.Length < minLength)
-    |> upgradeOpen
+    |> upgradeOpen tr
     |> Seq.iter (fun l -> l.Erase())
 
     tr.Commit()
@@ -41,8 +41,8 @@ let drawCircle () =
         use tr = Active.db.TransactionManager.StartTransaction()
 
         Active.db.CurrentSpaceId
-        |> getObject<BlockTableRecord> OpenMode.ForWrite
-        |> addEntity (new Circle(center, Vector3d.ZAxis, radius))
+        |> getObject<BlockTableRecord> tr OpenMode.ForWrite
+        |> addEntity tr (new Circle(center, Vector3d.ZAxis, radius))
         |> ignore
 
         tr.Commit()

@@ -32,20 +32,14 @@ type Editor with
         ed.GetDistance(new PromptDistanceOptions(msg, UseBasePoint = true, BasePoint = pt))
 
 // Helper functions for writing common tasks in a functional style
-let getTopTransaction (db: Database) =
-    match db.TransactionManager.TopTransaction with
-    | null -> raise (AcExn(ErrorStatus.NoActiveTransactions))
-    | t -> t
-
-let getObject<'T when 'T :> DBObject> mode (id: ObjectId) =
-    let tr = getTopTransaction id.Database
+let getObject<'T when 'T :> DBObject> (tr: Transaction) mode (id: ObjectId) =
     tr.GetObject(id, mode) :?> 'T
 
-let getModelSpace mode db =
+let getModelSpace tr mode db =
     SymbolUtilityServices.GetBlockModelSpaceId(db)
-    |> getObject<BlockTableRecord> mode
+    |> getObject<BlockTableRecord> tr mode
 
-let getObjects<'T when 'T :> DBObject> mode (ids: System.Collections.IEnumerable) =
+let getObjects<'T when 'T :> DBObject> tr mode (ids: System.Collections.IEnumerable) =
     let rx = RXObject.GetClass typeof<'T>
 
     ids
@@ -53,17 +47,17 @@ let getObjects<'T when 'T :> DBObject> mode (ids: System.Collections.IEnumerable
     |> Seq.choose
         (fun id ->
             if id.ObjectClass.IsDerivedFrom rx then
-                Some(getObject<'T> mode id)
+                Some(getObject<'T> tr mode id)
             else
                 None)
 
-let upgradeOpen<'T when 'T :> DBObject> (objs: seq<'T>) =
+let upgradeOpen<'T when 'T :> DBObject> tr (objs: seq<'T>) =
     seq {
         for o in objs do
             if o.IsWriteEnabled then
                 yield o
             else
-                yield getObject<'T> OpenMode.ForWrite o.ObjectId
+                yield getObject<'T> tr OpenMode.ForWrite o.ObjectId
     }
 
 let disposeAll (objs: seq<#DBObject>) =
@@ -80,8 +74,7 @@ let disposeAll (objs: seq<#DBObject>) =
 
     if last <> null then raise last
 
-let addEntity (ent: #Entity) (btr: BlockTableRecord) =
-    let tr = getTopTransaction btr.Database
+let addEntity (tr: Transaction) (ent: #Entity) (btr: BlockTableRecord) =
     let id = btr.AppendEntity(ent)
     tr.AddNewlyCreatedDBObject(ent, true)
     id

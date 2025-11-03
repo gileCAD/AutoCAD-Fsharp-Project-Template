@@ -45,8 +45,8 @@ let drawGoldenSpiral () =
         pline.TransformBy(Active.ed.CurrentUserCoordinateSystem)
 
         Active.db.CurrentSpaceId
-        |> getObject<BlockTableRecord> OpenMode.ForWrite
-        |> addEntity pline
+        |> getObject<BlockTableRecord> tr OpenMode.ForWrite
+        |> addEntity tr pline
         |> ignore
 
         tr.Commit()
