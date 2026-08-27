@@ -4,8 +4,6 @@ These templates allow to start a F# project for an AutoCAD plugin in Visual Stud
 'AutoCAD R24 Fsharp Project Template' is to be used with AutoCAD prior to 2025 (targets .NET Framework).
 'AutoCAD R25 Fsharp Project Template' is to be used with AutoCAD 2025 and later (targets .NET 8).
 
-For AutoCAD 2016 and later versions it is imperative that the LEGACYCODESEARCH system variable is set to 1 to allow automatic loading of the assembly. 
-
 The helpers.fs file contains helpers to write some common AutoCAD tasks in a more declarative functional style.
 The command.fs file contains an example of command.
 
