@@ -57,7 +57,7 @@ The path to the acad.exe file of the AutoCAD version to be launched at debugging
     "$safeprojectname$": {
       "commandName": "Executable",
       "executablePath": "C:\\Program Files\\Autodesk\\AutoCAD 2022\\acad.exe",
-      "commandLineArgs": "/nologo /b \"start.scr\""
+      "commandLineArgs": "/nologo /b \"$(MSBuildProjectDirectory)\\start.scr\""
     }
   }
 }
