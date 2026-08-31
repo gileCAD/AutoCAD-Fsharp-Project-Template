@@ -1,6 +1,6 @@
 # AutoCAD-Fsharp-Project-Template
 ### F# Visual Studio Project Template for an AutoCAD Plugin.
-These templates allow to start a F# project for an AutoCAD plugin in Visual Studio . They are designed to automatically start the specified AutoCAD version and load the assemby when starting the debugging.
+These templates allow to start a F# project for an AutoCAD plugin in Visual Studio . They are designed to automatically start the specified AutoCAD version and load the assembly when starting the debugging.
 'AutoCAD R24 Fsharp Project Template' is to be used with AutoCAD prior to 2025 (targets .NET Framework).
 'AutoCAD R25 Fsharp Project Template' is to be used with AutoCAD 2025 and later (targets .NET 8).
 
