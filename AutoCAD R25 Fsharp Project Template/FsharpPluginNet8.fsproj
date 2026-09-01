@@ -17,6 +17,7 @@
 	<ItemGroup>
 		<Compile Include="Helpers.fs"/>
 		<Compile Include="Commands.fs"/>
+		<None Include="start.scr" />
 	</ItemGroup>
 
 	<!-- Change the paths to the targeted AutoCAD libraries -->
